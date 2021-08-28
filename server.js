@@ -4,11 +4,11 @@ import routes from './app/routes/cliente.routes.js';
 
 const app = express();
 
-app.use(routes);
-
 app.use(bodyParser.json());
 
 app.use(bodyParser.urlencoded({extended: true}));
+
+app.use(routes);
 
 app.get("/", (req, res) => {
     res.json({message: "Welcome to bezkoder application"});

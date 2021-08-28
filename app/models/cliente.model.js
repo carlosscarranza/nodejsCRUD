@@ -21,7 +21,7 @@ Cliente.create = (newCliente, result) => {
 };
 
 Cliente.findById = (clienteId, result) => {
-  sql.query("SELECT * FROM clientes WHERE id = ${clienteId}", (err, res) => {
+  sql.query(`SELECT * FROM clientes WHERE id = ${clienteId}`, (err, res) => {
     if (err) {
       console.log("error", err);
       result(err, null);
@@ -53,7 +53,7 @@ Cliente.getAll = (result) => {
 
 Cliente.updateById = (id, cliente, result) => {
   sql.query(
-    "UPDATE clientes SET email = ?, activo = ? WHERE id = ?",
+    "UPDATE clientes SET email = ?, nombre = ?, activo = ? WHERE id = ?",
     [cliente.email, cliente.nombre, cliente.activo, id],
     (err, res) => {
       if (err) {

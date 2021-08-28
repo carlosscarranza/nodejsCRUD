@@ -2,6 +2,7 @@ import Cliente from "../models/cliente.model.js";
 
 //Crea y graba un nuevo cliente
 const create = (req, res) => {
+  console.log(req.body);
   if (!req.body) {
     res.status(400).send({
       message: "Contenido no puede estar vacio!",
@@ -64,13 +65,15 @@ const update = (req, res) => {
       message: "El contenido no puede estar vacio!",
     });
   }
-
+console.log(req.params.clienteId);
   Cliente.updateById(
+    
     req.params.clienteId,
     new Cliente(req.body),
     (err, data) => {
+      console.log(err);
       if (err) {
-        if (err.kind === "no_encontrado") {
+        if (err.kind === "not_found") {
           res.status(404).send({
             message: "Cliente no encontrado con el id ${req.params.clienteId}.",
           });
