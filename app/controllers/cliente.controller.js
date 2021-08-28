@@ -85,3 +85,36 @@ exports.update = (req, res) => {
     }
   );
 };
+
+//Eliminar un cliente con un clienteId en la peticion
+exports.delete = (req, res) => {
+  Cliente.remove(req.params.clienteId, (err, data) => {
+    if (err) {
+      if (err.kind === "not_found") {
+        res.status(404).send({
+          message: "Cliente no encontrado con el id ${req.params.clienteId}.",
+        });
+      } else {
+        res.status(500).send({
+          message:
+            "No se puede eliminar el cliente con id " + req.params.clienteId,
+        });
+      }
+    } else {
+      res.send({ message: "Cliente eliminado con éxito!" });
+    }
+  });
+};
+
+//Eliminar todos los clientes
+exports.deleteAll = (req, res) => {
+  Cliente.removeAll((err, data) => {
+    if (err) {
+      res.status(500).send({
+        message: err.message || "Ocurrió un error al eliminar los clientes.",
+      });
+    } else {
+      res.send({ message: "Todos los clientes fueron borrados con éxito!" });
+    }
+  });
+};
