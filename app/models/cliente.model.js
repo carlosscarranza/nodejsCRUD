@@ -1,4 +1,4 @@
-import sql from "./db";
+import sql from "./db.js";
 
 //Constructor
 const Cliente = function (cliente) {
@@ -104,4 +104,4 @@ Cliente.removeAll = (result) => {
   });
 };
 
-module.exports = Cliente;
+export default Cliente;

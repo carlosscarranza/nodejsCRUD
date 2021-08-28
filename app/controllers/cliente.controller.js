@@ -1,7 +1,7 @@
-import Cliente from "../models/cliente.model";
+import Cliente from "../models/cliente.model.js";
 
 //Crea y graba un nuevo cliente
-exports.create = (req, res) => {
+const create = (req, res) => {
   if (!req.body) {
     res.status(400).send({
       message: "Contenido no puede estar vacio!",
@@ -26,7 +26,7 @@ exports.create = (req, res) => {
 };
 
 //Retorna todos los clientes
-exports.findAll = (req, res) => {
+const findAll = (req, res) => {
   Cliente.getAll((err, data) => {
     if (err) {
       res.status(500).send({
@@ -39,7 +39,7 @@ exports.findAll = (req, res) => {
 };
 
 //Retorna un cliente con el clienteId
-exports.findOne = (req, res) => {
+const findOne = (req, res) => {
   Cliente.findById(req.params.clienteId, (err, data) => {
     if (err) {
       if (err.kind === "not_found") {
@@ -58,7 +58,7 @@ exports.findOne = (req, res) => {
 };
 
 //Modifica un cliente identificado por el clienteId
-exports.update = (req, res) => {
+const update = (req, res) => {
   if (!req.body) {
     res.status(400).send({
       message: "El contenido no puede estar vacio!",
@@ -87,7 +87,7 @@ exports.update = (req, res) => {
 };
 
 //Eliminar un cliente con un clienteId en la peticion
-exports.delete = (req, res) => {
+const deleteOne = (req, res) => {
   Cliente.remove(req.params.clienteId, (err, data) => {
     if (err) {
       if (err.kind === "not_found") {
@@ -107,7 +107,7 @@ exports.delete = (req, res) => {
 };
 
 //Eliminar todos los clientes
-exports.deleteAll = (req, res) => {
+const deleteAll = (req, res) => {
   Cliente.removeAll((err, data) => {
     if (err) {
       res.status(500).send({
@@ -118,3 +118,5 @@ exports.deleteAll = (req, res) => {
     }
   });
 };
+
+export default { create, findAll, findOne, update, deleteOne, deleteAll}

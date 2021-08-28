@@ -1,5 +1,5 @@
 import mysql from 'mysql';
-import dbConfig from '../config/db.config';
+import dbConfig from '../config/db.config.js';
 
 const connection = mysql.createConnection({
     host: dbConfig.HOST,
@@ -13,4 +13,4 @@ connection.connect((error)=>{
     console.log('Conexión Exitosa!')
 })
 
-module.exports = connection;
+export default connection;

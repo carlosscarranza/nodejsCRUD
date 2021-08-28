@@ -1,21 +1,24 @@
-module.exports = (app) => {
-  import clientes from "../controllers/cliente.controller";
+import express from 'express';
+import clientes from "../controllers/cliente.controller.js";
 
-  //Crear un cliente
-  app.post("/clientes", clientes.create);
+const app = express();
 
-  //Retorna todos los clientes
-  app.get("/clientes", clientes.findAll);
+//Crear un cliente
+app.post("/clientes", clientes.create);
 
-  //Retorna un cliente con clienteId
-  app.get("/clientes/:clienteId", clientes.findOne);
+//Retorna todos los clientes
+app.get("/clientes", clientes.findAll);
 
-  //Modifica un cliente con el clienteId
-  app.put("/clientes/:clienteId", clientes.update);
+//Retorna un cliente con clienteId
+app.get("/clientes/:clienteId", clientes.findOne);
 
-  //Elimina un cliente con el clientId
-  app.delete("/clientes/:clienteId", clientes.delete);
+//Modifica un cliente con el clienteId
+app.put("/clientes/:clienteId", clientes.update);
 
-  //Elimina todos los clientes
-  app.delete("/clientes", clientes.deleteAll);
-};
+//Elimina un cliente con el clientId
+app.delete("/clientes/:clienteId", clientes.deleteOne);
+
+//Elimina todos los clientes
+app.delete("/clientes", clientes.deleteAll);
+
+export default app;
