@@ -56,3 +56,32 @@ exports.findOne = (req, res) => {
     }
   });
 };
+
+//Modifica un cliente identificado por el clienteId
+exports.update = (req, res) => {
+  if (!req.body) {
+    res.status(400).send({
+      message: "El contenido no puede estar vacio!",
+    });
+  }
+
+  Cliente.updateById(
+    req.params.clienteId,
+    new Cliente(req.body),
+    (err, data) => {
+      if (err) {
+        if (err.kind === "no_encontrado") {
+          res.status(404).send({
+            message: "Cliente no encontrado con el id ${req.params.clienteId}.",
+          });
+        } else {
+          res.status(500).send({
+            message: "Error modificando cliente con id " + req.params.clienteId,
+          });
+        }
+      } else {
+        res.send(data);
+      }
+    }
+  );
+};
