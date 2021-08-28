@@ -67,7 +67,6 @@ const update = (req, res) => {
   }
 console.log(req.params.clienteId);
   Cliente.updateById(
-    
     req.params.clienteId,
     new Cliente(req.body),
     (err, data) => {

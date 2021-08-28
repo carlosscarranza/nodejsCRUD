@@ -74,7 +74,7 @@ Cliente.updateById = (id, cliente, result) => {
 };
 
 Cliente.remove = (id, result) => {
-  sql.query("DELETE FROM clientes WHRER id = ?", id, (err, res) => {
+  sql.query("DELETE FROM clientes WHERE id = ?", id, (err, res) => {
     if (err) {
       console.log("error", err);
       result(err, null);
